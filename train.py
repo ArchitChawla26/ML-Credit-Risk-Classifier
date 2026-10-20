@@ -279,7 +279,7 @@ def main():
         ]
         shap.summary_plot(sv, sample, show=False, max_display=15)
         plt.title("SHAP summary — gradient boosting model")
-        plt.tight_layout(), plt.savefig(CHARTS / "shap_summary.png", dpi=150,
+        plt.tight_layout(), plt.savefig(CHARTS / "shap_summary.png", dpi=90,
                                          bbox_inches="tight"), plt.close()
         print("explainability: SHAP")
     except Exception as exc:  # shap missing or incompatible -> honest fallback

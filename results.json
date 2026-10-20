@@ -1,0 +1,148 @@
+{
+  "dataset": {
+    "name": "UCI Default of Credit Card Clients",
+    "source_url": "https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients",
+    "rows": 30000,
+    "features": 23,
+    "base_rate_default": 0.2212,
+    "train_rows": 24000,
+    "test_rows": 6000,
+    "test_base_rate": 0.2212,
+    "seed": 42
+  },
+  "imbalance_handling": "No resampling. Logistic regression uses class_weight='balanced'; the booster uses scale_pos_weight = negatives/positives (HistGradientBoosting fallback: class_weight='balanced'). Operating threshold selected on training predictions via Youden's J and then frozen before touching the test set.",
+  "models": {
+    "logistic_regression": {
+      "cv_auc_train": {
+        "mean": 0.7275,
+        "std": 0.0113
+      },
+      "test": {
+        "auc": 0.7104,
+        "ks": 0.3598,
+        "threshold": 0.572,
+        "precision": 0.5116,
+        "recall": 0.4823,
+        "f1": 0.4965,
+        "confusion_matrix": {
+          "tn": 4062,
+          "fp": 611,
+          "fn": 687,
+          "tp": 640
+        },
+        "brier_score": 0.2088,
+        "ece_deciles": 0.2338
+      },
+      "test_at_0.50": {
+        "auc": 0.7104,
+        "ks": 0.3598,
+        "threshold": 0.5,
+        "precision": 0.3681,
+        "recall": 0.6307,
+        "f1": 0.4649,
+        "confusion_matrix": {
+          "tn": 3236,
+          "fp": 1437,
+          "fn": 490,
+          "tp": 837
+        },
+        "brier_score": 0.2088,
+        "ece_deciles": 0.2338
+      }
+    },
+    "gradient_boosting": {
+      "implementation": "XGBoost 2.0.3",
+      "cv_auc_train": {
+        "mean": 0.7806,
+        "std": 0.0078
+      },
+      "test": {
+        "auc": 0.7752,
+        "ks": 0.4219,
+        "threshold": 0.4378,
+        "precision": 0.4143,
+        "recall": 0.679,
+        "f1": 0.5146,
+        "confusion_matrix": {
+          "tn": 3399,
+          "fp": 1274,
+          "fn": 426,
+          "tp": 901
+        },
+        "brier_score": 0.1775,
+        "ece_deciles": 0.1897
+      },
+      "test_at_0.50": {
+        "auc": 0.7752,
+        "ks": 0.4219,
+        "threshold": 0.5,
+        "precision": 0.4703,
+        "recall": 0.6142,
+        "f1": 0.5327,
+        "confusion_matrix": {
+          "tn": 3755,
+          "fp": 918,
+          "fn": 512,
+          "tp": 815
+        },
+        "brier_score": 0.1775,
+        "ece_deciles": 0.1897
+      }
+    }
+  },
+  "explainability": {
+    "method": "SHAP (TreeExplainer, shap 0.54.1), 2,000-row test sample",
+    "top_drivers": [
+      {
+        "feature": "PAY_0",
+        "label": "Repayment status, Sep 2005 (most recent)",
+        "mean_abs_shap": 0.5386
+      },
+      {
+        "feature": "LIMIT_BAL",
+        "label": "Credit limit (NT$)",
+        "mean_abs_shap": 0.2378
+      },
+      {
+        "feature": "BILL_AMT1",
+        "label": "Bill amount, Sep 2005",
+        "mean_abs_shap": 0.1676
+      },
+      {
+        "feature": "PAY_AMT2",
+        "label": "Payment amount, Aug 2005",
+        "mean_abs_shap": 0.122
+      },
+      {
+        "feature": "PAY_AMT1",
+        "label": "Payment amount, Sep 2005",
+        "mean_abs_shap": 0.111
+      },
+      {
+        "feature": "PAY_AMT3",
+        "label": "PAY_AMT3",
+        "mean_abs_shap": 0.1089
+      },
+      {
+        "feature": "PAY_3",
+        "label": "Repayment status, Jul 2005",
+        "mean_abs_shap": 0.0881
+      },
+      {
+        "feature": "PAY_2",
+        "label": "Repayment status, Aug 2005",
+        "mean_abs_shap": 0.0857
+      },
+      {
+        "feature": "BILL_AMT3",
+        "label": "BILL_AMT3",
+        "mean_abs_shap": 0.0819
+      },
+      {
+        "feature": "PAY_AMT5",
+        "label": "PAY_AMT5",
+        "mean_abs_shap": 0.0693
+      }
+    ]
+  }
+}

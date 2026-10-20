@@ -1,6 +1,6 @@
 # ML Credit-Risk Classifier with Explainability
 
-**Archit Chawla** · October 2026
+**Archit Chawla**
 
 Predicting next-month credit-card default on 30,000 real borrowers — a logistic-regression baseline benchmarked honestly against XGBoost gradient boosting, with SHAP explanations of what actually drives the predictions.
 
@@ -13,6 +13,20 @@ Predicting next-month credit-card default on 30,000 real borrowers — a logisti
 | Recall @ operating threshold | 0.48 | **0.68** |
 
 Top default driver (SHAP): the most recent month's repayment status — more than twice the weight of any other feature. Full detail in `model_card.md`; the story in `credit_risk_report.md`.
+
+## Charts
+
+![ROC curves — logistic regression vs. XGBoost](charts/roc_curves.png)
+
+*ROC curves on the held-out test set: XGBoost (AUC 0.775) separates defaulters from non-defaulters materially better than the logistic baseline (0.710).*
+
+![SHAP summary — what drives the XGBoost model](charts/shap_summary.png)
+
+*SHAP summary: the most recent month's repayment status (PAY_0) dominates — recent payment behavior, not demographics, drives the risk ranking.*
+
+![Calibration — predicted vs. actual default rates](charts/calibration.png)
+
+*Calibration by decile: the ranking is sound, but raw probabilities run hot under class weighting — recalibration would be needed before pricing use.*
 
 ## What's in here
 
